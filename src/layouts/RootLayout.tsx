@@ -5,5 +5,5 @@ interface RootLayoutProps {
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
-    return <main className="px-6">{children}</main>;
+    return <main className="px-6 lg:max-w-7xl lg:mx-auto">{children}</main>;
 }

@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, HTMLInputTypeAttribute, SetStateAction } from 'react';
 
 interface LoginInputProps {
     id: string;
@@ -6,6 +6,7 @@ interface LoginInputProps {
     placeholder: string;
     error?: string;
     HandleChange: Dispatch<SetStateAction<string | undefined>>;
+    type: HTMLInputTypeAttribute | undefined;
 }
 
 export default function LoginInput({
@@ -14,6 +15,7 @@ export default function LoginInput({
     placeholder,
     error,
     HandleChange,
+    type,
 }: LoginInputProps) {
     return (
         <div>
@@ -24,7 +26,7 @@ export default function LoginInput({
                 {label}
             </label>
             <input
-                type="text"
+                type={type}
                 id={id}
                 placeholder={placeholder}
                 className="login-input font-poppins font-light outline-none rounded-md border border-ocGray text-ocGray text-xs placeholder:text-xs placeholder:text-ocGray placeholder:font-light placeholder:font-poppins focus:border-black focus:text-black py-2 px-5 mb-1"

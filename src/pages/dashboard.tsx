@@ -23,9 +23,6 @@ export default function DashboardPage() {
         return unsubscribe;
     }, []);
 
-    useEffect(() => {
-        console.log('Is User Logged In: ', isLoggedIn);
-    }, [isLoggedIn]);
     return (
         <RootLayout>
             {loading ? (
