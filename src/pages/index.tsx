@@ -1,5 +1,7 @@
 import Head from 'next/head';
 import RootLayout from '@/layouts/RootLayout';
+import { BsTwitter } from 'react-icons/bs';
+import { MdOutlineEmail } from 'react-icons/md';
 
 export default function Home() {
     return (
@@ -16,54 +18,64 @@ export default function Home() {
                 />
             </Head>
             <RootLayout>
-                <section id="welcome" className="mb-12 md:mb-32 md:pt-20">
-                    <div id="heading" className="mb-3 md:mb-6">
-                        <h1 className="font-roboto font-bold text-sm uppercase md:text-xl">
+                <section id="welcome" className="mb-32 pt-20">
+                    <div id="heading" className="mb-6">
+                        <h1 className="font-roboto font-bold uppercase text-xl">
                             Welcome To
                         </h1>
-                        <h2 className="font-poppins font-bold text-4xl md:text-5xl">
+                        <h2 className="font-poppins font-bold text-5xl">
                             OceList
                         </h2>
                     </div>
-                    <p className="font-poppins-light leading-7 text-xs md:text-base md:w-3/4 md:leading-8">
+                    <p className="font-poppins-light text-base w-3/4 leading-8">
                         OceList is your new one-stop shop for Open Source
-                        projects! With a fully community driven inventory, we
-                        provide a wide range of open source projects of all
-                        kinds for you to view and start collaborating on, as
-                        well as provide a free platform for developers to list
-                        their very own open source projects and get new
-                        collaborators! Start browsing now!
+                        projects! We provide a wide range of open source
+                        projects of all kinds for you to view and start
+                        collaborating on, as well as provide a free platform for
+                        developers to list their very own open source projects
+                        and get new collaborators! Start browsing now!
                     </p>
                 </section>
                 <section
                     id="why-ocelist"
-                    className="relative mb-12 py-6 -z-10 md:mb-32 md:py-20 text-white"
+                    className="relative -z-10 mb-32 py-20 text-white"
                 >
-                    <h3 className="font-poppins font-bold text-md mb-3 md:text-[40px]">
+                    <h3 className="font-poppins font-bold text-md mb-3 text-[40px]">
                         Why OceList?
                     </h3>
-                    <p className="font-poppins leading-7 text-xs md:text-base md:leading-8 md:w-3/4">
-                        OceList is fully community driven, meaning all projects
-                        listed were provided by likeminded developers just like
-                        you who are looking to be apart of the world of Open
-                        Source! We also provide a free and easy platform for
-                        developers with their very own open source projects, to
-                        get their project in the eyes of other developers
-                        looking for new projects to contribute to.
+                    <p className="font-poppins text-base leading-8 w-3/4">
+                        OceList is constantly being updated with new projects by
+                        myself, the creator. With this, there will always be a
+                        reliable source of popular open source projects for
+                        users to select from.
                     </p>
                 </section>
                 <section id="find-contributors">
-                    <h4 className="font-poppins font-bold text-md mb-3 md:text-[40px]">
+                    <h4 className="font-poppins font-bold text-md mb-3 text-[40px]">
                         Looking For Contributors?
                     </h4>
-                    <p className="font-poppins leading-7 text-xs md:text-sm md:leading-7 lg:text-base lg:leading-8 lg:w-3/4">
-                        Well you&apos;ve come to the right place. Here on
-                        OceList, you can list your open source project
-                        completely for free for all users to see. The process is
-                        fully automatic and as easy as 1, 2, 3! Head over to the
-                        Login page to login with GitHub and get your projects
-                        out there!
+                    <p className="font-poppins text-sm leading-7 lg:text-base lg:leading-8 lg:w-3/4">
+                        If you&apos;re looking for contributors for your Open
+                        Source project, feel free to contact me with regards to
+                        getting your project listed here on OceList! It&apos;s
+                        completely free.
                     </p>
+                    <div>
+                        <h5 className="mb-3 mt-6 font-roboto text-lg font-bold">
+                            Contact Information
+                        </h5>
+                        <div className="font-light flex flex-col gap-2">
+                            <a
+                                href="https://twitter.com/dev_rolle"
+                                className="flex items-center gap-2"
+                            >
+                                <BsTwitter /> @dev_rolle
+                            </a>
+                            <p className="flex items-center gap-2">
+                                <MdOutlineEmail /> sheltonrolle7@gmail.com
+                            </p>
+                        </div>
+                    </div>
                 </section>
             </RootLayout>
         </>
