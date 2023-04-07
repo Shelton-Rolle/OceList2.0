@@ -4,12 +4,31 @@ import RootLayout from '@/layouts/RootLayout';
 import { get, ref } from 'firebase/database';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
+import { useEffect, useState } from 'react';
 
 interface BrowsePageProps {
     projects: any[];
 }
 
 export default function BrowsePage({ projects }: BrowsePageProps) {
+    const [results, setResults] = useState<any[]>();
+    const [searchQuery, setSearchQuery] = useState<string | undefined>();
+
+    useEffect(() => {
+        if (searchQuery === '' || searchQuery === undefined) {
+            setResults(projects);
+            return;
+        }
+        const matches = [];
+
+        for (let i = 0; i < projects.length; i++) {
+            if (projects[i]?.name.includes(searchQuery))
+                matches.push(projects[i]);
+        }
+
+        setResults(matches);
+    }, [searchQuery]);
+
     return (
         <>
             <Head>
@@ -23,9 +42,23 @@ export default function BrowsePage({ projects }: BrowsePageProps) {
             </Head>
             <RootLayout>
                 <h1>Browse Page</h1>
-                {projects?.map((project, index) => (
-                    <ProjectCard project={project} key={index} />
-                ))}
+                <label className="w-full max-w-md font-roboto font-bold text-xs lowercase flex flex-col gap-1">
+                    Search
+                    <input
+                        type="text"
+                        placeholder="Search"
+                        className="font-poppins font-normal text-sm border-2 border-black rounded-md px-3 py-2"
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                </label>
+                <div
+                    id="project-grid"
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6"
+                >
+                    {results?.map((project, index) => (
+                        <ProjectCard project={project} key={index} />
+                    ))}
+                </div>
             </RootLayout>
         </>
     );

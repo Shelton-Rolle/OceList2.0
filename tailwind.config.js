@@ -6,6 +6,7 @@ module.exports = {
             colors: {
                 ocGray: '#939191',
                 error: '#FB2020',
+                cardBg: '#F9F9F9',
             },
             fontFamily: {
                 roboto: ['Roboto', 'sans serif'],
