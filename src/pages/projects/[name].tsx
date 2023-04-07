@@ -10,11 +10,11 @@ interface ProjectPageProps {
 }
 
 export default function ProjectPage({ name, project }: ProjectPageProps) {
-    console.log('Project Name: ', name);
-    console.log('Project: ', project);
     return (
         <RootLayout>
             <h1>Project Page</h1>
+            <p>{name}</p>
+            <p>{project?.owner?.login}</p>
         </RootLayout>
     );
 }
