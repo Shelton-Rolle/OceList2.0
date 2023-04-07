@@ -32,22 +32,23 @@ export default function BrowsePage({ projects }: BrowsePageProps) {
     return (
         <>
             <Head>
-                <title>Home</title>
-                <meta name="description" content="Home page for OceList." />
+                <title>Browse</title>
+                <meta
+                    name="description"
+                    content="Browse a collection of Open Source projects."
+                />
                 <meta
                     name="viewport"
                     content="width=device-width, initial-scale=1"
                 />
-                <link rel="icon" href="/favicon.ico" />
             </Head>
             <RootLayout>
-                <h1>Browse Page</h1>
-                <label className="w-full max-w-md font-roboto font-bold text-xs lowercase flex flex-col gap-1">
+                <label className="w-full max-w-md font-roboto font-bold text-xs lowercase flex flex-col gap-1 lg:text-base">
                     Search
                     <input
                         type="text"
                         placeholder="Search"
-                        className="font-poppins font-normal text-sm border-2 border-black rounded-md px-3 py-2"
+                        className="font-poppins font-normal text-sm border-2 border-black rounded-md px-3 py-2 lg:text-lg"
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />
                 </label>
