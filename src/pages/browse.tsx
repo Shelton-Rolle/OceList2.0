@@ -10,7 +10,6 @@ interface BrowsePageProps {
 }
 
 export default function BrowsePage({ projects }: BrowsePageProps) {
-    console.log('Projects: ', projects);
     return (
         <>
             <Head>
