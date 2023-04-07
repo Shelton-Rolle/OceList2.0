@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { GoMarkGithub, GoLinkExternal } from 'react-icons/go';
+import FormatRepoName from '@/helpers/FormatRepoName';
 
 interface ProjectCardProps {
     project: any;
@@ -28,7 +29,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                     </a>
                 )}
                 <Link
-                    href={`/projects/${project.name}`}
+                    href={`/projects/${FormatRepoName(project.name)}`}
                     className="text-sm lowercase font-medium hover:underline hover:text-blue-400 duration-200 ml-auto cursor-pointer"
                 >
                     View More
