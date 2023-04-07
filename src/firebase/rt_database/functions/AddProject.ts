@@ -1,6 +1,7 @@
 import { GetRepository } from '@/octokit/functions';
 import { ref, set } from 'firebase/database';
 import database from '../init';
+import GetCurrentDate from '@/helpers/GetCurrentDate';
 
 export default async function AddProject(
     owner_name: string,
@@ -10,13 +11,7 @@ export default async function AddProject(
         success: false,
         error: undefined,
     };
-    const today = new Date();
-    let date = today.getDate() < 10 ? `0${today.getDate()}` : today.getDate();
-    let month =
-        today.getMonth() + 1 < 10
-            ? `0${today.getMonth() + 1}`
-            : today.getMonth() + 1;
-    let year = today.getFullYear();
+    const date = GetCurrentDate();
 
     await GetRepository(owner_name, repo_name).then(async ({ data, error }) => {
         if (error)
@@ -28,7 +23,7 @@ export default async function AddProject(
         if (data) {
             await set(ref(database, `/projects/${data?.name}`), {
                 ...data,
-                upload_date: `${date}/${month}/${year}`,
+                upload_date: date,
             })
                 .then(() => {
                     response = {

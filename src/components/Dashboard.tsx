@@ -3,9 +3,13 @@ import Button from './Button';
 import AddProject from '@/firebase/rt_database/functions/AddProject';
 import { useRouter } from 'next/router';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
-import { DashboardProps } from '@/pages/dashboard';
+import ProjectTableRow from './ProjectTableRow';
 
-export default function Dashboard({ projects, error }: DashboardProps) {
+interface DashboardProps {
+    projects: any[];
+}
+
+export default function Dashboard({ projects }: DashboardProps) {
     const router = useRouter();
     const [projectModalIsOpen, setProjectModalIsOpen] = useState<
         boolean | undefined
@@ -73,7 +77,7 @@ export default function Dashboard({ projects, error }: DashboardProps) {
                                 Name
                             </td>
                             <td className="col-span-4 px-2 py-2 bg-gray-200 border-x border-x-gray-300 lg:text-xl">
-                                Uploaded Date
+                                Last Updated
                             </td>
                             <td className="col-span-4 px-2 py-2 bg-gray-200 border-x border-x-gray-300 lg:text-xl">
                                 Actions
@@ -82,24 +86,13 @@ export default function Dashboard({ projects, error }: DashboardProps) {
                     </thead>
                     <tbody>
                         {projects?.map((project, index) => (
-                            <tr
+                            <ProjectTableRow
+                                name={project?.name}
+                                owner={project?.owner?.login}
+                                upload_date={project?.upload_date}
+                                index={index}
                                 key={index}
-                                className={`grid grid-cols-12 ${
-                                    index % 2 === 0
-                                        ? 'bg-blue-200'
-                                        : 'bg-transparent'
-                                }`}
-                            >
-                                <td className="col-span-4 px-2 py-2 border border-gray-200">
-                                    {project?.name}
-                                </td>
-                                <td className="col-span-4 px-2 py-2 border border-gray-200">
-                                    {project?.upload_date}
-                                </td>
-                                <td className="col-span-4 px-2 py-2 border border-gray-200">
-                                    Actions
-                                </td>
-                            </tr>
+                            />
                         ))}
                     </tbody>
                 </table>

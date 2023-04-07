@@ -8,12 +8,11 @@ import { get, ref } from 'firebase/database';
 import { GetStaticProps } from 'next';
 import { useEffect, useState } from 'react';
 
-export interface DashboardProps {
+interface DashboardPageProps {
     projects: any[];
-    error: string | null;
 }
 
-export default function DashboardPage({ projects, error }: DashboardProps) {
+export default function DashboardPage({ projects }: DashboardPageProps) {
     const [loading, setLoading] = useState<boolean | undefined>();
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
@@ -38,7 +37,7 @@ export default function DashboardPage({ projects, error }: DashboardProps) {
             ) : (
                 <>
                     {isLoggedIn ? (
-                        <Dashboard projects={projects} error={error} />
+                        <Dashboard projects={projects} />
                     ) : (
                         <DashboardLogin />
                     )}
@@ -49,7 +48,6 @@ export default function DashboardPage({ projects, error }: DashboardProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-    let error: string | null = null;
     const projects = await get(ref(database, '/projects'))
         .then((snapshot) => {
             if (snapshot.exists()) {
@@ -59,13 +57,12 @@ export const getStaticProps: GetStaticProps = async () => {
             }
         })
         .catch((error) => {
-            error = `${error.code} - ${error.message}`;
+            console.error(`${error.code} - ${error.message}`);
         });
 
     return {
         props: {
             projects,
-            error,
         },
     };
 };
