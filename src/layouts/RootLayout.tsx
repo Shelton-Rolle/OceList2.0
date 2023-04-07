@@ -1,3 +1,4 @@
+import { PageHeader } from '@/components/PageHeader';
 import { ReactNode } from 'react';
 
 interface RootLayoutProps {
@@ -5,5 +6,10 @@ interface RootLayoutProps {
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
-    return <main className="px-6 lg:max-w-7xl lg:mx-auto">{children}</main>;
+    return (
+        <main className="px-6 lg:max-w-7xl lg:mx-auto">
+            <PageHeader />
+            <div className="mt-8">{children}</div>
+        </main>
+    );
 }
