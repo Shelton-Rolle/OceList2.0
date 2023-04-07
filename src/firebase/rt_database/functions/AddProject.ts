@@ -2,6 +2,7 @@ import { GetRepository } from '@/octokit/functions';
 import { ref, set } from 'firebase/database';
 import database from '../init';
 import GetCurrentDate from '@/helpers/GetCurrentDate';
+import FormatRepoName from '@/helpers/FormatRepoName';
 
 export default async function AddProject(
     owner_name: string,
@@ -14,6 +15,8 @@ export default async function AddProject(
     const date = GetCurrentDate();
 
     await GetRepository(owner_name, repo_name).then(async ({ data, error }) => {
+        const name = FormatRepoName(repo_name);
+
         if (error)
             response = {
                 success: false,
@@ -21,7 +24,7 @@ export default async function AddProject(
             };
 
         if (data) {
-            await set(ref(database, `/projects/${data?.name}`), {
+            await set(ref(database, `/projects/${name}`), {
                 ...data,
                 upload_date: date,
             })
