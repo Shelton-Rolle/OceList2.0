@@ -25,6 +25,7 @@ export default function ProjectPage({ name, project }: ProjectPageProps) {
     const [readme, setReadme] = useState<string | undefined>();
 
     async function FetchData() {
+        console.log('Project: ', project);
         const { data, error } = await GetRepositoryREADME(
             project?.owner?.login,
             name
