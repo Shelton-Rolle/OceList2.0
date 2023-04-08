@@ -31,8 +31,7 @@ export async function GetRepositoryREADME(owner: string, repo: string) {
         data: null,
         error: undefined,
     };
-    console.log('Owner: ', owner);
-    console.log('Repo: ', repo);
+
     await octokit
         .request('GET /repos/{owner}/{repo}/readme', {
             owner,
