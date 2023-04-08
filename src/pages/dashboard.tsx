@@ -5,7 +5,7 @@ import database from '@/firebase/rt_database/init';
 import RootLayout from '@/layouts/RootLayout';
 import { onAuthStateChanged } from 'firebase/auth';
 import { get, ref } from 'firebase/database';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import { useEffect, useState } from 'react';
 
 interface DashboardPageProps {
@@ -47,7 +47,7 @@ export default function DashboardPage({ projects }: DashboardPageProps) {
     );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
     const projects = await get(ref(database, '/projects'))
         .then((snapshot) => {
             if (snapshot.exists()) {
