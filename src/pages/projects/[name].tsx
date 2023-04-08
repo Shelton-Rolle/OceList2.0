@@ -126,8 +126,12 @@ export default function ProjectPage({ name, project }: ProjectPageProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const name = context.params!.name;
-    const project = await get(child(ref(database), `projects/${name}`))
+    const params = context.params!;
+    const name = params.name as string;
+
+    const project = await get(
+        child(ref(database), `projects/${name.toLowerCase()}`)
+    )
         .then((snapshot) => {
             if (snapshot.exists()) {
                 return snapshot.val();
