@@ -59,7 +59,7 @@ export default function BrowsePage({ projects }: BrowsePageProps) {
                     </h1>
                     <p className="font-poppins font-light text-sm">
                         Contact me @dev_rolle on Twitter <strong>OR</strong> by
-                        email sheltonrolle7@gmail.com and let me know.
+                        email contact.support@ocelist.com and let me know.
                     </p>
                 </div>
                 <div
