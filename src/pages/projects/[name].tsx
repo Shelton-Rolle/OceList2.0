@@ -48,13 +48,17 @@ export default function ProjectPage({ name, project }: ProjectPageProps) {
         <RootLayout>
             <div className="mt-12 mb-5">
                 <h1 className="font-roboto font-bold text-3xl hover:text-blue-300 duration-200">
-                    <a href={project?.html_url} className="flex">
+                    <a
+                        href={project?.html_url}
+                        target="_blank"
+                        className="flex"
+                    >
                         {name}
                         <GoLinkExternal size={12} />
                     </a>
                 </h1>
                 <p className="font-poppins text-sm hover:text-blue-300 hover:underline duration-200">
-                    <a href={project?.owner?.html_url}>
+                    <a href={project?.owner?.html_url} target="_blank">
                         {project?.owner?.login}
                     </a>
                 </p>
