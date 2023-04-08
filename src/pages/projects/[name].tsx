@@ -3,7 +3,7 @@ import FormatRepoName from '@/helpers/FormatRepoName';
 import RootLayout from '@/layouts/RootLayout';
 import { GetRepositoryREADME } from '@/octokit/functions';
 import { get, child, ref } from 'firebase/database';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetServerSideProps, GetStaticPaths, GetStaticProps } from 'next';
 import { useEffect, useState } from 'react';
 import {
     GoLaw,
@@ -120,32 +120,8 @@ export default function ProjectPage({ name, project }: ProjectPageProps) {
     );
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-    const projects = await get(child(ref(database), '/projects'))
-        .then((snapshot) => {
-            if (snapshot.exists()) {
-                return Object.values(snapshot.val());
-            } else {
-                return [];
-            }
-        })
-        .catch((error) => {
-            return [];
-        });
-
-    const paths = projects?.map((project: any) => ({
-        params: { name: FormatRepoName(project?.name) },
-    }));
-
-    return {
-        paths,
-        fallback: false,
-    };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-    const name = params?.name;
-
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const name = context.params!.name;
     const project = await get(child(ref(database), `projects/${name}`))
         .then((snapshot) => {
             if (snapshot.exists()) {
