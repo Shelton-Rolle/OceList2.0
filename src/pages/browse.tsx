@@ -52,6 +52,16 @@ export default function BrowsePage({ projects }: BrowsePageProps) {
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />
                 </label>
+                <div className="flex flex-col gap-1 my-5 border-l-4 border-ocGray px-4 py-4 bg-slate-100 w-fit rounded-md">
+                    <h1 className="font-roboto font-medium text-base">
+                        Are we missing a project you think we should have
+                        listed?
+                    </h1>
+                    <p className="font-poppins font-light text-sm">
+                        Contact me @dev_rolle on Twitter <strong>OR</strong> by
+                        email sheltonrolle7@gmail.com and let me know.
+                    </p>
+                </div>
                 <div
                     id="project-grid"
                     className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6"
