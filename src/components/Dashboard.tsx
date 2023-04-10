@@ -15,9 +15,7 @@ export default function Dashboard({ projects }: DashboardProps) {
         boolean | undefined
     >();
     const [repositoryName, setRepositoryName] = useState<string | undefined>();
-    const [repositoryNameError, setRepositoryNameError] = useState<
-        string | undefined
-    >();
+    const [addRepoError, setAddRepoError] = useState<string | undefined>();
     const [repositoryOwner, setRepositoryOwner] = useState<
         string | undefined
     >();
@@ -32,7 +30,7 @@ export default function Dashboard({ projects }: DashboardProps) {
         e.preventDefault();
         setSubmittingProject(true);
         if (repositoryName === undefined) {
-            setRepositoryNameError('This field is required.');
+            setAddRepoError('This field is required.');
             setSubmittingProject(false);
             return;
         }
@@ -48,7 +46,7 @@ export default function Dashboard({ projects }: DashboardProps) {
                 if (success) router.reload();
 
                 if (error) {
-                    setRepositoryNameError(error);
+                    setAddRepoError(error);
                     setSubmittingProject(false);
                 }
             }
@@ -77,9 +75,12 @@ export default function Dashboard({ projects }: DashboardProps) {
                                 Name
                             </td>
                             <td className="col-span-4 px-2 py-2 bg-gray-200 border-x border-x-gray-300 lg:text-xl">
+                                Owner
+                            </td>
+                            <td className="col-span-2 px-2 py-2 bg-gray-200 border-x border-x-gray-300 lg:text-xl">
                                 Last Updated
                             </td>
-                            <td className="col-span-4 px-2 py-2 bg-gray-200 border-x border-x-gray-300 lg:text-xl">
+                            <td className="col-span-2 px-2 py-2 bg-gray-200 border-x border-x-gray-300 lg:text-xl">
                                 Actions
                             </td>
                         </tr>
@@ -109,9 +110,9 @@ export default function Dashboard({ projects }: DashboardProps) {
                             onSubmit={AddNewProject}
                         >
                             <div className="flex flex-col items-start gap-1">
-                                {repositoryNameError && (
+                                {addRepoError && (
                                     <p className="text-xs font-poppins font-medium text-error mb-4">
-                                        {repositoryNameError}
+                                        {addRepoError}
                                     </p>
                                 )}
                                 <input
@@ -156,7 +157,11 @@ export default function Dashboard({ projects }: DashboardProps) {
                                 id="actions"
                                 className="flex items-center gap-4 mt-4"
                             >
-                                <Button style="button" color="#E35858">
+                                <Button
+                                    onClick={() => setProjectModalIsOpen(false)}
+                                    style="button"
+                                    color="#E35858"
+                                >
                                     Cancel
                                 </Button>
                                 <Button

@@ -62,18 +62,21 @@ export default function ProjectTableRow({
                 index % 2 === 0 ? 'bg-blue-200' : 'bg-transparent'
             }`}
         >
-            <td className="col-span-4 px-2 py-2 border border-gray-200">
+            <td className="col-span-4 px-2 py-2 border border-gray-200 overflow-x-scroll">
                 {name}
             </td>
             <td className="col-span-4 px-2 py-2 border border-gray-200">
+                {owner}
+            </td>
+            <td className="col-span-2 px-2 py-2 border border-gray-200 overflow-x-scroll">
                 {upload_date}
             </td>
-            <td className="relative col-span-4 px-2 py-2 border border-gray-200 flex items-center justify-end">
+            <td className="relative col-span-2 px-2 py-2 border border-gray-200 flex items-center justify-end">
                 <button onClick={() => setOpenActionMenu(!openActionMenu)}>
                     <BsThreeDots size={22} />
                 </button>
                 {openActionMenu && (
-                    <div className="absolute bottom-0 right-0 translate-y-full border-2 border-slate-300 rounded-md px-5 py-2 flex items-center gap-4 bg-white">
+                    <div className="absolute bottom-0 right-0 translate-y-full border-2 border-slate-300 rounded-md px-5 py-2 flex items-center gap-4 bg-white z-20">
                         <button
                             className="hover:text-blue-500 duration-150"
                             onClick={ReloadRepo}
