@@ -5,6 +5,10 @@ import {
     SetStateAction,
 } from 'react';
 
+export interface BrowsePageProps {
+    projects: any[];
+}
+
 export interface ButtonProps {
     children: ReactNode | ReactNode[];
     color: string;
@@ -13,8 +17,41 @@ export interface ButtonProps {
     style: 'button' | 'link';
 }
 
+export interface CardMenuItemProps {
+    label: string;
+    onClick: Dispatch<SetStateAction<string>>;
+    active: boolean;
+    clickValue: string;
+}
+
 export interface DashboardProps {
     projects: any[];
+}
+
+export interface DashboardPageProps {
+    projects: any[];
+}
+
+export interface HomePageProps {
+    highlightedProjects: any[];
+}
+
+export interface LanguageProps {
+    language: string;
+}
+
+export interface LanguageCheckboxProps {
+    language: string;
+}
+
+export interface LanguageDropdownProps {
+    filterLanguages: string[];
+    setFilterLanguages: Dispatch<SetStateAction<string[]>>;
+}
+
+export interface LinksProps {
+    repo: string;
+    homepage?: string;
 }
 
 export interface LoginInputProps {
@@ -32,21 +69,9 @@ export interface NavItemProps {
     active: boolean;
 }
 
-export interface RootLayoutProps {
-    children: ReactNode | ReactNode[];
-}
-
-export interface BrowsePageProps {
-    projects: any[];
-}
-
 export interface ProjectPageProps {
     name: string;
     project: any;
-}
-
-export interface DashboardPageProps {
-    projects: any[];
 }
 
 export interface ProjectTableRowProps {
@@ -56,31 +81,16 @@ export interface ProjectTableRowProps {
     index: number;
 }
 
-export interface HomePageProps {
-    highlightedProjects: any[];
-}
-
 export interface ProjectCardProps {
     project: any;
 }
-export interface CardMenuItemProps {
-    label: string;
-    onClick: Dispatch<SetStateAction<string>>;
-    active: boolean;
-    clickValue: string;
-}
 
-export interface LanguageProps {
-    language: string;
+export interface RootLayoutProps {
+    children: ReactNode | ReactNode[];
 }
 
 export interface StatsProps {
     forks: number;
     stargazers: number;
     subscribers: number;
-}
-
-export interface LinksProps {
-    repo: string;
-    homepage?: string;
 }

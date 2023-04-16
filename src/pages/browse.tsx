@@ -1,3 +1,4 @@
+import LanguageDropdown from '@/components/LanguageDropdown';
 import ProjectCard from '@/components/ProjectCard';
 import database from '@/firebase/rt_database/init';
 import RootLayout from '@/layouts/RootLayout';
@@ -10,6 +11,7 @@ import { useEffect, useState } from 'react';
 export default function BrowsePage({ projects }: BrowsePageProps) {
     const [results, setResults] = useState<any[]>();
     const [searchQuery, setSearchQuery] = useState<string | undefined>();
+    const [filterLanguages, setFilterLanguages] = useState<string[]>([]);
 
     useEffect(() => {
         if (searchQuery === '' || searchQuery === undefined) {
@@ -24,7 +26,26 @@ export default function BrowsePage({ projects }: BrowsePageProps) {
         }
 
         setResults(matches);
-    }, [searchQuery]);
+    }, [searchQuery, projects]);
+
+    useEffect(() => {
+        if (filterLanguages.length === 0) {
+            setResults(projects);
+        } else {
+            const updatedResults: string[] = [];
+            for (let i = 0; i < projects.length; i++) {
+                if (
+                    filterLanguages.includes(
+                        projects[i]?.language?.toLowerCase()
+                    )
+                ) {
+                    updatedResults.push(projects[i]);
+                }
+            }
+
+            setResults(updatedResults);
+        }
+    }, [filterLanguages, projects]);
 
     return (
         <>
@@ -49,6 +70,10 @@ export default function BrowsePage({ projects }: BrowsePageProps) {
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />
                 </label>
+                <LanguageDropdown
+                    filterLanguages={filterLanguages}
+                    setFilterLanguages={setFilterLanguages}
+                />
                 <div className="flex flex-col gap-1 my-5 border-l-4 border-ocGray px-4 py-4 bg-slate-100 w-fit rounded-md">
                     <h1 className="font-roboto font-medium text-base">
                         Are we missing a project you think we should have
@@ -61,7 +86,7 @@ export default function BrowsePage({ projects }: BrowsePageProps) {
                 </div>
                 <div
                     id="project-grid"
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6"
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-6"
                 >
                     {results?.map((project, index) => (
                         <ProjectCard project={project} key={index} />
