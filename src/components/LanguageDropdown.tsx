@@ -36,7 +36,7 @@ export default function LanguageDropdown({
 
     return (
         <div className="relative w-full mt-6">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col gap-6 lg:gap-0 lg:flex-row lg:items-center lg:justify-between">
                 <button
                     className={`font-bold text-base lg:text-xl flex items-center gap-9 ${inter.className}`}
                     onClick={() => setShowLanguages(!showLanguages)}
