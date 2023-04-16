@@ -3,30 +3,39 @@ import RootLayout from '@/layouts/RootLayout';
 import { GetServerSideProps } from 'next';
 import database from '@/firebase/rt_database/init';
 import { get, ref } from 'firebase/database';
+import ProjectCard from '@/components/ProjectCard';
+import { inter, poppins } from '../fonts';
+import { Footer } from '@/components/Footer';
 interface HomePageProps {
     highlightedProjects: any[];
 }
 
 export default function Home({ highlightedProjects }: HomePageProps) {
-    console.log('Highlighted Projects: ', highlightedProjects);
     return (
         <>
             <Head>
                 <title>OceList</title>
-                <meta
-                    name="description"
-                    content="Landing page to introduce the user to the platform."
-                />
+                <meta name="description" content="OceList landing page." />
                 <meta
                     name="viewport"
                     content="width=device-width, initial-scale=1"
                 />
             </Head>
             <RootLayout>
-                <section id="hero">
-                    <h1>Welcome To</h1>
-                    <h2>OceList</h2>
-                    <p>
+                <section id="hero" className="mb-20">
+                    <h1
+                        className={`text-xs lg:text-base font-bold ${inter.className}`}
+                    >
+                        Welcome To
+                    </h1>
+                    <h2
+                        className={`text-3xl lg:text-5xl font-bold mb-6 ${inter.className}`}
+                    >
+                        OceList
+                    </h2>
+                    <p
+                        className={`text-sm lg:text-base leading-7 lg:leading-9 ${poppins.className}`}
+                    >
                         OceList is a platform with one purpose, to provide
                         developers with an easier way of discovering Open Source
                         repositories to contribute to. OceList has an ever
@@ -37,13 +46,27 @@ export default function Home({ highlightedProjects }: HomePageProps) {
                         your interests and start contributing.
                     </p>
                 </section>
-                <section id="highlighted-projects">
-                    {/* Display a list of a few highlighted projects */}
+                <section
+                    id="highlighted-projects"
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20"
+                >
+                    <h3
+                        className={`font-bold text-xl mb-8 ${inter.className} md:col-span-2 lg:col-span-3`}
+                    >
+                        Highlighted Project
+                    </h3>
+                    {highlightedProjects.map((project, index) => (
+                        <ProjectCard project={project} key={index} />
+                    ))}
                 </section>
-                <section id="recommendations">
-                    <div>
-                        <h3>Have a repo in mind?</h3>
-                        <p>
+                <section id="recommendations" className="relative py-4 lg:py-6">
+                    <div className="max-w-xl mx-auto">
+                        <h4
+                            className={`font-bold text-xl mb-3 ${inter.className}`}
+                        >
+                            Have a repo in mind?
+                        </h4>
+                        <p className={`text-sm ${poppins.className}`}>
                             If you have a repository you’d like to see listed,
                             whether it’s one you enjoy or your very own
                             repository, feel free to contact me using any of the
@@ -51,18 +74,23 @@ export default function Home({ highlightedProjects }: HomePageProps) {
                             great projects to add to the platform, and its
                             completely free!
                         </p>
-                        <div id="contacts">
+                        <div id="contacts" className="flex gap-6 mt-7">
                             <div>
-                                <p>Twitter</p>
+                                <p className={`text-xs ${poppins.className}`}>
+                                    Twitter
+                                </p>
                                 <p>@dev_rolle</p>
                             </div>
                             <div>
-                                <p>Email</p>
+                                <p className={`text-xs ${poppins.className}`}>
+                                    Email
+                                </p>
                                 <p>contact.support@ocelist.com</p>
                             </div>
                         </div>
                     </div>
                 </section>
+                <Footer />
             </RootLayout>
         </>
     );

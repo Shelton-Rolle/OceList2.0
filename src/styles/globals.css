@@ -12,18 +12,6 @@
     --link-blue: #9381ff;
 }
 
-#why-ocelist::before {
-    position: absolute;
-    content: '';
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100vw;
-    height: 100%;
-    background: #293241;
-    z-index: -1;
-}
-
 #readme {
     border: 2px solid rgb(188, 188, 188);
     border-radius: 7px;
@@ -122,4 +110,24 @@
 #readme .contains-task-list {
     list-style-type: none;
     padding: 0;
+}
+
+#recommendations::before,
+#footer::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    height: 100%;
+    z-index: -1;
+}
+
+#recommendations::before {
+    background-color: #ebebeb;
+}
+
+#footer::before {
+    background-color: black;
 }
