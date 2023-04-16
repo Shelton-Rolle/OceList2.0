@@ -6,9 +6,7 @@ import { get, ref } from 'firebase/database';
 import ProjectCard from '@/components/ProjectCard';
 import { inter, poppins } from '../fonts';
 import { Footer } from '@/components/Footer';
-interface HomePageProps {
-    highlightedProjects: any[];
-}
+import { HomePageProps } from '@/types/props';
 
 export default function Home({ highlightedProjects }: HomePageProps) {
     return (

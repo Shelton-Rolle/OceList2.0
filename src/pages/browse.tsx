@@ -1,14 +1,11 @@
 import ProjectCard from '@/components/ProjectCard';
 import database from '@/firebase/rt_database/init';
 import RootLayout from '@/layouts/RootLayout';
+import { BrowsePageProps } from '@/types/props';
 import { get, ref } from 'firebase/database';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-
-interface BrowsePageProps {
-    projects: any[];
-}
 
 export default function BrowsePage({ projects }: BrowsePageProps) {
     const [results, setResults] = useState<any[]>();

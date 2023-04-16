@@ -15,11 +15,7 @@ import {
 } from 'react-icons/go';
 import remarkGfm from 'remark-gfm';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
-
-interface ProjectPageProps {
-    name: string;
-    project: any;
-}
+import { ProjectPageProps } from '@/types/props';
 
 export default function ProjectPage({ name, project }: ProjectPageProps) {
     const [readme, setReadme] = useState<string | undefined>();

@@ -3,14 +3,11 @@ import DashboardLogin from '@/components/DashboardLogin';
 import auth from '@/firebase/auth/init';
 import database from '@/firebase/rt_database/init';
 import RootLayout from '@/layouts/RootLayout';
+import { DashboardPageProps } from '@/types/props';
 import { onAuthStateChanged } from 'firebase/auth';
 import { get, ref } from 'firebase/database';
 import { GetServerSideProps } from 'next';
 import { useEffect, useState } from 'react';
-
-interface DashboardPageProps {
-    projects: any[];
-}
 
 export default function DashboardPage({ projects }: DashboardPageProps) {
     const [loading, setLoading] = useState<boolean | undefined>();
