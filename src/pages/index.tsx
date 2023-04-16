@@ -114,13 +114,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
     for (let i = 0; i < 6; i++) {
         const index = Math.floor(Math.random() * projects.length);
-        if (
-            !highlightedProjects.includes(
-                highlightedProjects.push(projects[index])
-            )
-        ) {
-            highlightedProjects.push(projects[index]);
-        }
+        !highlightedProjects.includes(
+            highlightedProjects.push(projects[index])
+        );
     }
 
     return {
