@@ -1,13 +1,4 @@
-import { Dispatch, HTMLInputTypeAttribute, SetStateAction } from 'react';
-
-interface LoginInputProps {
-    id: string;
-    label: string;
-    placeholder: string;
-    error?: string;
-    HandleChange: Dispatch<SetStateAction<string | undefined>>;
-    type: HTMLInputTypeAttribute | undefined;
-}
+import { LoginInputProps } from '@/types/props';
 
 export default function LoginInput({
     id,

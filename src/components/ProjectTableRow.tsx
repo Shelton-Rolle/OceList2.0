@@ -7,13 +7,7 @@ import { ref, remove, set } from 'firebase/database';
 import database from '@/firebase/rt_database/init';
 import { useRouter } from 'next/router';
 import GetCurrentDate from '@/helpers/GetCurrentDate';
-
-interface ProjectTableRowProps {
-    name: string;
-    owner: string;
-    upload_date: string;
-    index: number;
-}
+import { ProjectTableRowProps } from '@/types/props';
 
 export default function ProjectTableRow({
     name,

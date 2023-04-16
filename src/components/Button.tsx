@@ -1,12 +1,5 @@
+import { ButtonProps } from '@/types/props';
 import { ReactNode } from 'react';
-
-interface ButtonProps {
-    children: ReactNode | ReactNode[];
-    color: string;
-    onClick?: () => void;
-    type?: 'button' | 'submit' | 'reset' | undefined;
-    style: 'button' | 'link';
-}
 
 export default function Button({
     children,

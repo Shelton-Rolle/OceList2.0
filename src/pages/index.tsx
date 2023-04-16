@@ -1,83 +1,125 @@
 import Head from 'next/head';
 import RootLayout from '@/layouts/RootLayout';
-import { BsTwitter } from 'react-icons/bs';
-import { MdOutlineEmail } from 'react-icons/md';
+import { GetServerSideProps } from 'next';
+import database from '@/firebase/rt_database/init';
+import { get, ref } from 'firebase/database';
+import ProjectCard from '@/components/ProjectCard';
+import { inter, poppins } from '../fonts';
+import { Footer } from '@/components/Footer';
+import { HomePageProps } from '@/types/props';
 
-export default function Home() {
+export default function Home({ highlightedProjects }: HomePageProps) {
     return (
         <>
             <Head>
                 <title>OceList</title>
-                <meta
-                    name="description"
-                    content="Landing page to introduce the user to the platform."
-                />
+                <meta name="description" content="OceList landing page." />
                 <meta
                     name="viewport"
                     content="width=device-width, initial-scale=1"
                 />
             </Head>
             <RootLayout>
-                <section id="welcome" className="mb-32 pt-20">
-                    <div id="heading" className="mb-6">
-                        <h1 className="font-roboto font-bold uppercase text-xl">
-                            Welcome To
-                        </h1>
-                        <h2 className="font-poppins font-bold text-5xl">
-                            OceList
-                        </h2>
-                    </div>
-                    <p className="font-poppins-light text-base w-3/4 leading-8">
-                        OceList is your new one-stop shop for Open Source
-                        projects! We provide a wide range of open source
-                        projects of all kinds for you to view and start
-                        collaborating on, as well as provide a free platform for
-                        developers to list their very own open source projects
-                        and get new collaborators! Start browsing now!
+                <section id="hero" className="mb-20">
+                    <h1
+                        className={`text-xs lg:text-base font-bold ${inter.className}`}
+                    >
+                        Welcome To
+                    </h1>
+                    <h2
+                        className={`text-3xl lg:text-5xl font-bold mb-6 ${inter.className}`}
+                    >
+                        OceList
+                    </h2>
+                    <p
+                        className={`text-sm lg:text-base leading-7 lg:leading-9 ${poppins.className}`}
+                    >
+                        OceList is a platform with one purpose, to provide
+                        developers with an easier way of discovering Open Source
+                        repositories to contribute to. OceList has an ever
+                        growing collection of Open Source repositories ranging
+                        from ones owned by huge corporations, to smaller
+                        repositories created by solo developers. OceList gives
+                        you a place where you can easily find projects that fit
+                        your interests and start contributing.
                     </p>
                 </section>
                 <section
-                    id="why-ocelist"
-                    className="relative -z-10 mb-32 py-20 text-white"
+                    id="highlighted-projects"
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20"
                 >
-                    <h3 className="font-poppins font-bold text-md mb-3 text-[40px]">
-                        Why OceList?
+                    <h3
+                        className={`font-bold text-xl mb-8 ${inter.className} md:col-span-2 lg:col-span-3`}
+                    >
+                        Highlighted Project
                     </h3>
-                    <p className="font-poppins text-base leading-8 w-3/4">
-                        OceList is constantly being updated with new projects by
-                        myself, the creator. With this, there will always be a
-                        reliable source of popular open source projects for
-                        users to select from.
-                    </p>
+                    {highlightedProjects.map((project, index) => (
+                        <ProjectCard project={project} key={index} />
+                    ))}
                 </section>
-                <section id="find-contributors">
-                    <h4 className="font-poppins font-bold text-md mb-3 text-[40px]">
-                        Looking For Contributors?
-                    </h4>
-                    <p className="font-poppins text-sm leading-7 lg:text-base lg:leading-8 lg:w-3/4">
-                        If you&apos;re looking for contributors for your Open
-                        Source project, feel free to contact me with regards to
-                        getting your project listed here on OceList! It&apos;s
-                        completely free.
-                    </p>
-                    <div>
-                        <h5 className="mb-3 mt-6 font-roboto text-lg font-bold">
-                            Contact Information
-                        </h5>
-                        <div className="font-light flex flex-col gap-2">
-                            <a
-                                href="https://twitter.com/dev_rolle"
-                                className="flex items-center gap-2"
-                            >
-                                <BsTwitter /> @dev_rolle
-                            </a>
-                            <p className="flex items-center gap-2">
-                                <MdOutlineEmail /> contact.support@ocelist.com
-                            </p>
+                <section id="recommendations" className="relative py-4 lg:py-6">
+                    <div className="max-w-xl mx-auto">
+                        <h4
+                            className={`font-bold text-xl mb-3 ${inter.className}`}
+                        >
+                            Have a repo in mind?
+                        </h4>
+                        <p className={`text-sm ${poppins.className}`}>
+                            If you have a repository you’d like to see listed,
+                            whether it’s one you enjoy or your very own
+                            repository, feel free to contact me using any of the
+                            contact methods listed below. I’m always looking for
+                            great projects to add to the platform, and its
+                            completely free!
+                        </p>
+                        <div id="contacts" className="flex gap-6 mt-7">
+                            <div>
+                                <p className={`text-xs ${poppins.className}`}>
+                                    Twitter
+                                </p>
+                                <p>@dev_rolle</p>
+                            </div>
+                            <div>
+                                <p className={`text-xs ${poppins.className}`}>
+                                    Email
+                                </p>
+                                <p>contact.support@ocelist.com</p>
+                            </div>
                         </div>
                     </div>
                 </section>
+                <Footer />
             </RootLayout>
         </>
     );
 }
+
+export const getServerSideProps: GetServerSideProps = async () => {
+    const projects = await get(ref(database, '/projects'))
+        .then((snapshot) => {
+            if (snapshot.exists()) {
+                return Object.values(snapshot.val());
+            } else {
+                return [];
+            }
+        })
+        .catch((error) => {
+            console.error(`${error.code} - ${error.message}`);
+            return [];
+        });
+
+    const highlightedProjects: any[] = [];
+
+    for (let i = 0; i < 6; i++) {
+        const index = Math.floor(Math.random() * projects.length);
+        !highlightedProjects.includes(
+            highlightedProjects.push(projects[index])
+        );
+    }
+
+    return {
+        props: {
+            highlightedProjects,
+        },
+    };
+};

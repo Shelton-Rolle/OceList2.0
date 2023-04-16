@@ -1,12 +1,7 @@
 import { ReactNode, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-
-export interface NavItemProps {
-    label: string | ReactNode;
-    href: string;
-    active: boolean;
-}
+import { NavItemProps } from '@/types/props';
 
 export const PageHeader = () => {
     const router = useRouter();

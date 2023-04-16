@@ -4,10 +4,7 @@ import AddProject from '@/firebase/rt_database/functions/AddProject';
 import { useRouter } from 'next/router';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import ProjectTableRow from './ProjectTableRow';
-
-interface DashboardProps {
-    projects: any[];
-}
+import { DashboardProps } from '@/types/props';
 
 export default function Dashboard({ projects }: DashboardProps) {
     const router = useRouter();
