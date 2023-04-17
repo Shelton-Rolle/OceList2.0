@@ -9,6 +9,29 @@ import { Footer } from '@/components/Footer';
 import { HomePageProps } from '@/types/props';
 
 export default function Home({ highlightedProjects }: HomePageProps) {
+    async function Translate(text: string, languageCode: string) {
+        let translation: { translatedText: string } | undefined;
+
+        const data = {
+            text,
+            languageCode,
+        };
+
+        await fetch(
+            'http://localhost:3000/api/translate?' + new URLSearchParams(data)
+        )
+            .then((res) => res.json())
+            .then((res) => {
+                translation = res;
+            })
+            .catch((error) => {
+                console.log(`${error.code} - ${error.message}`);
+                translation = undefined;
+            });
+
+        return translation?.translatedText;
+    }
+
     return (
         <>
             <Head>

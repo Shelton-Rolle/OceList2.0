@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@google-cloud/translate": "7.2.1",
     "@octokit/core": "4.2.0",
     "@types/node": "18.15.11",
     "@types/react": "18.0.33",
